@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Редагувати пост</title>
+    <link rel="stylesheet" type="text/css" href="/styles/style.css">
+</head>
+<body>
+<h1>Редагувати пост</h1>
+<form id="editPostForm">
+    <label for="title">Заголовок:</label>
+    <input type="text" id="title" placeholder="Заголовок" required>
+
+    <label for="body">Текст поста:</label>
+    <textarea id="body" placeholder="Текст поста" required></textarea>
+    <button type="submit">Зберегти зміни</button>
+</form>
+</body>
+<script>
+    const postId = window.location.pathname.split('/').pop();
+    console.log(postId);
+    fetch(`/api/posts/${postId}`)
+        .then((response) => response.json())
+        .then((post) => {
+            document.getElementById('title').value = post.title;
+            document.getElementById('body').value = post.body;
+        })
+        .catch((error) => {
+            console.error('Помилка при отриманні даних поста:', error);
+        });
+    // Обробник для форми редагування поста
+    document.getElementById('editPostForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const title = document.getElementById('title').value;
+        const body = document.getElementById('body').value;
+        // Rest of your code to submit the edited post
+        fetch(`/api/posts/${postId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ title, body }),
+        })
+            .then((response) => response.json())
+            .then((updatedPost) => {
+                // Оновити відповідний пост у списку або перенаправити на сторінку зі списком
+                console.log('Пост оновлено:', updatedPost);
+                window.location.href = `/posts`;
+            })
+            .catch((error) => {
+                console.error('Помилка при редагуванні поста:', error);
+            });
+    });
+</script>
+<style></style>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Список постів</title>
+    <link rel="stylesheet" type="text/css" href="/styles/style.css">
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+</head>
+<body>
+
+<div class="post-header">
+    <h1>Список постів</h1>
+    <button id="addPostButton" class="button-add" onclick="goToAddPostPage()">
+        <i class="fa fa-plus"></i> Додати пост
+    </button></div>
+
+<ul id="postList">
+    <!-- Постійно оновлюється через JavaScript -->
+</ul>
+
+</body>
+<script>
+    function goToAddPostPage() {
+        // Use JavaScript to navigate to the "add_post" page
+        window.location.href = "/add_post";
+    }
+    function getPosts() {
+        fetch('/api/posts')
+            .then((response) => response.json())
+            .then((data) => {
+                const postList = document.getElementById('postList');
+                postList.innerHTML = '';
+
+                data.forEach((post) => {
+                    const postItem = document.createElement('li');
+                    postItem.innerHTML = `
+          <h3>${post.title}</h3>
+          <p>${post.body}</p>
+          <button onclick="editPost(${post.id})" class="edit-button"><i class="far fa-edit"></i> Редагувати</button>
+          <button onclick="deletePost(${post.id})" class="delete-button"><i class="far fa-trash-alt"></i> Видалити</button>
+        `;
+                    postList.appendChild(postItem);
+                });
+            })
+            .catch((error) => {
+                console.error('Помилка при отриманні списку постів:', error);
+            });
+    }
+    getPosts()
+    function editPost(postId) {
+        // Fetch the post data for the given postId
+        window.location.href = `/edit/${postId}`;
+    }
+
+    // Функція для видалення поста
+    function deletePost(postId) {
+        fetch(`/api/posts/${postId}`, {
+            method: 'DELETE',
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                // Видалити відповідний пост із списку
+                console.log('Пост видалено:', data);
+                getPosts(); // Оновити список постів після видалення
+            })
+            .catch((error) => {
+                console.error('Помилка при видаленні поста:', error);
+            });
+    }
+
+</script>
+</html>
