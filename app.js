@@ -4,7 +4,8 @@ const port = process.env.PORT || 3000;
 const path = require('path');
 const bodyParser = require('body-parser');
 const fs = require('fs');
-
+const http = require('http')
+const server = http.createServer(app)
 function readPosts() {
   try {
     const data = fs.readFileSync('posts.json');
@@ -98,6 +99,6 @@ app.get('/edit/:id', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'edit_post.html'));
 });
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
