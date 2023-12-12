@@ -2,7 +2,7 @@
 h1 {
   font-size: 24px;
   font-weight: 400;
-  color: #222b32;
+  color: #f500ff;
 }
 
 /* Стилізація форм для додавання та редагування постів */
@@ -26,7 +26,7 @@ textarea {
 }
 
 button {
-  background-color: #4CAF50;
+  background-color: #f500ff;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -48,26 +48,26 @@ li {
   margin: 10px;
   width: 400px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  background-color: #fff;
+  background-color: #d5a8b1;
   color: #333;
   transition: background-color 0.3s;
 }
 
 li:hover {
-  background-color: #f5f5f5;
+  background-color: pink;
 }
 
 /* Style for post headers (title) */
 h3 {
   font-size: 18px;
-  color: #007BFF;
+  color: #f500ff;
   margin-bottom: 5px;
 }
 
 /* Style for post descriptions (body) */
 p {
   font-size: 14px;
-  color: #555;
+  color: deeppink;
   max-height: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -75,7 +75,7 @@ p {
 }
 /* Стилізація кнопок "Редагувати" та "Видалити" */
 button.edit-button {
-  background-color: #3498db;
+  background-color: #f500ff;
   color: white;
   padding: 5px 10px;
   border: none;
@@ -84,7 +84,7 @@ button.edit-button {
 }
 
 button.edit-button:hover {
-  background-color: #2980b9;
+  background-color: #942f98;
 }
 
 button.delete-button {
@@ -111,7 +111,7 @@ button i {
 .button-add{
   display: inline-block;
   padding: 10px 20px;
-  background-color: #007BFF; /* Button background color */
+  background-color: #f500ff; /* Button background color */
   color: #fff; /* Button text color */
   border: none;
   border-radius: 5px;
@@ -119,5 +119,5 @@ button i {
   font-size: 16px;
 }
 .button-add:hover {
-  background-color: #1E7ADB;
+  background-color: #942f98;
 }
